@@ -94,19 +94,32 @@ public class Wordle {
         if (guess.length() != answer.length()) {
             throw new IllegalArgumentException("Different lengths!");
         }
-        String indicators = "";
-        for (int j = 0; j < 5; j++) {
-            if (guess.charAt(j) == answer.charAt(j)) {
-                indicators += "V";
-            } else {
-                if (answer.contains(String.valueOf(guess.charAt(j)))) {
-                    indicators += "O";
-                } else {
-                    indicators += "X";
+
+        char[] indicators = new char[5];
+        String s = answer;
+        for (int i = 0; i < 5; i++) { // add every 'V', remove correct letters from answer
+            if (guess.charAt(i) == answer.charAt(i)) {
+                indicators[i] = 'V';
+                s = removeLetter(s, guess.charAt(i));
+            }
+        }
+        // restart the loop to check with the remaining characters
+        for (int i = 0; i < 5; i++) {
+            if (indicators[i] != 'V') {
+                // if indicator position is already marked 'V', skip it
+                // (so it doesn't get overwritten or get removed from the remaining charaters)
+                if (s.contains(String.valueOf(guess.charAt(i)))) {
+                    // if the remaining characters contains letter
+                    indicators[i] = 'O'; // put an 'O', and remove it from remaining letters
+                    s = removeLetter(s, guess.charAt(i));
+                } else { // // if the remaining characters doesn't contain letter
+                    indicators[i] = 'X'; // put an 'X'
+                    // and don't remove it from remaining letters, because it's not in there
                 }
             }
         }
-        return indicators;
+
+        return new String(indicators);
     }
 
     private static boolean isStringInArray(String str, String[] arr) {
@@ -134,6 +147,11 @@ public class Wordle {
         System.out.println("\tO - letter in the word but wrong spot");
         System.out.println("\tX - letter not in the word");
         System.out.println();
+    }
+
+    private static String removeLetter(String s, char c) {
+        s = s.substring(0, s.indexOf(c)) + s.substring(s.indexOf(c) + 1);
+        return s;
     }
 
 }
