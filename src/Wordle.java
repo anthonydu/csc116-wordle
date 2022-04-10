@@ -107,7 +107,7 @@ public class Wordle {
         // restart the loop to check with the remaining characters
         for (int i = 0; i < 5; i++) {
             if (indicators[i] != 'V') {
-                // if indicator position is already marked 'V', skip it
+                // if indicator position is already marked 'V', don't check it
                 // (so it doesn't get overwritten or get removed from the remaining charaters)
                 if (s.contains(String.valueOf(guess.charAt(i)))) {
                     // if the remaining characters contains letter
