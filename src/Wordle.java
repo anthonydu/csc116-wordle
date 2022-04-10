@@ -98,6 +98,7 @@ public class Wordle {
         char[] indicators = new char[5];
         String s = answer;
         for (int i = 0; i < 5; i++) { // add every 'V', remove correct letters from answer
+            // so that if another one of the same letter appears it won't be found and marked
             if (guess.charAt(i) == answer.charAt(i)) {
                 indicators[i] = 'V';
                 s = removeLetter(s, guess.charAt(i));
