@@ -60,7 +60,7 @@ public class Wordle {
                 System.out.println();
                 System.out.println("You won! The word was " + answer.toUpperCase() + ".");
                 if (i == 0) {
-                    System.out.println("You got the answer in 1 guess?!");
+                    System.out.println("You got the answer on the first guess?! How?!");
                 } else {
                     System.out.println("You got the answer in " + (i + 1) + " guesses!");
                 }
