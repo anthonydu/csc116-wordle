@@ -24,7 +24,7 @@ public class Wordle {
         String answer = answers[new Random().nextInt(answers.length)];
 
         String[] guesses = new String[]{"first", "second", "third",
-                                        "forth", "fifth", "sixth and final"};
+                                        "fourth", "fifth", "sixth and final"};
 
         Scanner console = new Scanner(System.in);
 
